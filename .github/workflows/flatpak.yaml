@@ -1,0 +1,66 @@
+name: Flatpak
+on:
+  push:
+    branches: [ "main" ]
+    tags:
+      - "v*"
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+permissions:
+  contents: write
+env:
+  APP_NAME: IrScrutinizer
+  APP_ID: org.harctoolbox.irscrutinizer
+  MANIFEST: org.harctoolbox.irscrutinizer.yml
+  FLATPAK_BRANCH: stable
+jobs:
+  flatpak:
+    name: Flatpak
+    strategy:
+      matrix:
+        include:
+          - arch: x86_64
+            runner: ubuntu-24.04
+      fail-fast: false
+    runs-on: ${{ matrix.runner }}
+    container:
+      image: ghcr.io/flathub-infra/flatpak-github-actions:freedesktop-25.08
+      options: --privileged
+    steps:
+      - uses: actions/checkout@v6
+      - uses: flatpak/flatpak-github-actions/flatpak-builder@v6
+        with:
+          bundle: ${{ env.APP_NAME }}.${{ matrix.arch }}.flatpak
+          manifest-path: ${{ env.MANIFEST }}
+          branch: ${{ env.FLATPAK_BRANCH }}
+          cache-key: flatpak-builder-${{ github.sha }}
+          arch: ${{ matrix.arch }}
+          upload-artifact: false
+          verbose: true
+      - uses: actions/upload-artifact@v7
+        with:
+          name: ${{ env.APP_NAME }}.${{ matrix.arch }}.flatpak
+          path: ${{ env.APP_NAME }}.${{ matrix.arch }}.flatpak
+          archive: false
+          retention-days: 14
+  release:
+    name: Release
+    needs: flatpak
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-24.04
+    steps:
+      - id: version
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const tag = context.ref.replace('refs/tags/', '');
+            const version = tag.startsWith('v') ? tag.slice(1) : tag;
+            core.setOutput('value', version);
+      - uses: actions/download-artifact@v8
+        with:
+          path: release-assets
+          merge-multiple: true
+      - uses: softprops/action-gh-release@v2
+        with:
+          name: ${{ steps.version.outputs.value }}

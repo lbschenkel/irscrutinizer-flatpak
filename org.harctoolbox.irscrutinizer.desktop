@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=IrScrutinizer
+Comment=Program for capturing, generating, analyzing, importing, and exporting of infrared (IR) signals.
+Exec=IrScrutinizer
+Icon=org.harctoolbox.irscrutinizer
+Categories=AudioVideo;
+Type=Application
+Terminal=false
+StartupNotify=true
+MimeType=text/girr;

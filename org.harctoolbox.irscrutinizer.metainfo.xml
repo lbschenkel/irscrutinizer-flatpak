@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop-application">
+  <id>org.harctoolbox.irscrutinizer</id>
+
+  <name>IrScrutinizer</name>
+  <summary>Powerful program for capturing, generating, analyzing, importing, and exporting of infrared (IR) signals</summary>
+  <content_rating type="oars-1.1" />
+
+  <developer id="org.harctoolbox">
+    <name>Bengt Mårtensson</name>
+  </developer>
+
+  <url type="homepage">https://harctoolbox.org</url>
+  <url type="help">https://harctoolbox.org/IrScrutinizer.html</url>
+  <url type="vcs-browser">https://github.com/bengtmartensson/IrScrutinizer</url>
+  <url type="bugtracker">https://github.com/bengtmartensson/IrScrutinizer/issues</url>
+
+  <metadata_license>FSFAP</metadata_license>
+  <project_license>GPL-3.0-or-later</project_license>
+
+  <supports>
+    <control>pointing</control>
+    <control>keyboard</control>
+    <control>touch</control>
+  </supports>
+
+  <description>
+    <p>
+      IrScrutinizer is a powerful program for capturing, generating, analyzing,
+      importing and exporting infrared (IR) signals.
+    </p>
+    <p>
+      For capturing and sending IR signals several different hardware sensors
+      and senders are supported. IR Signals can be imported not only by capturing
+      from one of the supported hardware sensors (among others: IrWidget,
+      Global Caché, and Arduino), but also from a number of different file formats
+      (among others: LIRC, Wave, Pronto Classic and professional,
+      and different text based formats; not only from files, but also from the
+      clipboard, from URLs, and from file hierarchies), as well as the Internet
+      IR Databases by Global Caché and by IRDB.
+    </p>
+    <p>
+      Imported signals can be decoded, analyzed, edited, and plotted. A collection
+      of IR signal can thus be assembled and edited, and finally exported in one of
+      the many supported formats.
+    </p>
+    <p>
+      The program contains the powerful IrpTransmogrifier IR-renderer, which
+      means that almost all IR protocols known to the Internet community can be
+      generated.
+    </p>
+  </description>
+  <screenshots>
+    <screenshot type="default">
+      <image type="source">https://raw.githubusercontent.com/bengtmartensson/IrScrutinizer/master/screenshot.png</image>
+    </screenshot>
+  </screenshots>
+
+  <launchable type="desktop-id">org.harctoolsbox.irscrutinizer.desktop</launchable>
+  <releases>
+    <release version="2.4.2" date="2025-02-17">
+      <description>
+        <p>Many bugfixes and enhancements. Uses LTS IrpTransmogrifier 1.2.14.</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-2.4.2</url>
+    </release>
+    <release version="2.4.1" date="2024-03-16">
+      <description>
+        <p>Many bugfixes and enhancements. Uses LTS IrpTransmogrifier 1.2.13.</p>
+        <p>**Full Changelog**: https://github.com/bengtmartensson/IrScrutinizer/compare/Version-2.4.0...Version-2.4.1</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-2.4.1</url>
+    </release>
+    <release version="2.4.0" date="2022-12-20">
+      <description>
+        <p>Many changes and bug fixes. Uses LTS IrpTransmogrifier 1.2.11.</p>
+        <p>Contained files:</p>
+        <p>_Update 2023-08-21, for Linux and /dev/lirc: Unfortunately, this build contains [a broken DevSlashLirc](https://github.com/bengtmartensson/IrScrutinizer/issues/492). If this is a concern for you, please use the [snapshot](https://github.com/bengtmartensson/IrScrutinizer/releases/tag/ci-build)._</p>
+        <p>Release notes: ```Version 2.4.0, released 2022-12-20.</p>
+        <ul>
+          <li>Documentation improvements. #269.</li>
+          <li>Fix HardwareManager.close() misbehavior when called during shutdown. #463.</li>
+          <li>IrWidget: Add option for not dropping DTR and RTS when opening the device. #462.</li>
+          <li>Uses IrpTransmogrifier 1.2.11, see IrpTransmogrifier.releasenotes.txt.</li>
+          <li>Option for reporting all decodes, corresponding to decode --all in IrpTransmogrifier. #457.</li>
+          <li>Remove incomplete HTTP proxy support. #456.</li>
+          <li>Some export formats erroneously case sensitive wrt protocol name. #453.</li>
+          <li>Default name ("remote") in MetaDataDialog.</li>
+          <li>New name transformations in Parametric Remote: lowercase, uppercase, capitilize. #447.</li>
+          <li>Updated export formats Lirc.</li>
+          <li>New command line option --loglevel, cf. IrpTransmogrifier.</li>
+          <li>Exportformats: better handling of export format parameters. Implemented export formats documentation. #323.</li>
+          <li>Some layout tweaks. #366, #401.</li>
+          <li>Remove Lirc as sending device (partially replaced by NamedCommandSender). #399.</li>
+          <li>Remove IrTrans support (except for the NamedCommandSender).</li>
+          <li>Remove explicit IrToy sending/capturing support (in Linux, still indirectly supported through DevSlashLirc).</li>
+          <li>Intervals in Render/F, S, F, etc now parsed correctly. #437.</li>
+          <li>Remove "LIRC Mode 2" as capturing device. #378.</li>
+          <li>Redesign hardware configuration and selection. #281.</li>
+          <li>New tool for sending named commands "Named Command Sender". #128.```</li>
+        </ul>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-2.4.0</url>
+    </release>
+    <release version="2.3.1" date="2021-07-04">
+      <description>
+        <p>Minor changes and bug fixes. Uses LTS IrpTransmogrifier 1.2.10.</p>
+        <p>### Contained files:</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-2.3.1</url>
+    </release>
+    <release version="2.3.0" date="2020-09-25">
+      <description>
+        <p>This release uses [NRJavaSerial](https://github.com/NeuronRobotics/nrjavaserial) instead of RXTX. Also, most serial hardware has been reworked. There is also a number of bugfixes and improvements.</p>
+        <p>### Contained files:</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-2.3.0</url>
+    </release>
+    <release version="2.2.6" date="2020-05-26">
+      <description>
+        <p>### Contained files:</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-2.2.6</url>
+    </release>
+    <release version="2.2.4" date="2020-01-15">
+      <description>
+        <p>This is the first version after 2.1.0. (The gap is due to the wish of keeping the version number compatible with IrpTransmogrifier).</p>
+        <p>### Contained files:</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-2.2.4</url>
+    </release>
+    <release version="2.1.0" date="2019-08-31">
+      <description>
+        <p>Minor improvements and bug fixes. Uses IrpTransmogrifier 1.1.0, Girr 2.1.0.</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-2.1.0</url>
+    </release>
+    <release version="2.0.1" date="2019-08-11">
+      <description>
+        <p>Finally,  Version 2, called 2.0.1 (there has never been a 2.0.0).</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-2.0.1</url>
+    </release>
+    <release version="1.4.3" date="2019-06-13">
+      <description>
+        <p>This release is the "second final" 1.x.y release; based on IrpMaster as rendering engine and DecodeIR as decoding engine. Further releases will be based on IrpTransmogrifier instead, and will be numbered 2.x.y. (see #212).</p>
+        <p>In comparision with 1.4.2 there are some rather important bugfixes. Also, the HTTP-functions can now optionally use a proxy.</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-1.4.3</url>
+    </release>
+    <release version="1.4.2" date="2018-09-01">
+      <description>
+        <p>This release is the final 1.x.y release; based on IrpMaster as rendering engine and DecodeIR as decoding engine. Further releases will be based on IrpTransmogrifier instead, and will be numbered 2.x.y. (see #212).</p>
+        <p>[IrScrutinizer.releasenotes.txt](https://github.com/bengtmartensson/harctoolboxbundle/files/2342546/IrScrutinizer.releasenotes.txt)</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-1.4.2</url>
+    </release>
+    <release version="1.4.1" date="2017-06-16">
+      <description>
+        <p>A few minor bug fixes and improvements.</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-1.4.1</url>
+    </release>
+    <release version="1.4" date="2017-03-15">
+      <description>
+        <p>Second try; fixed #186</p>
+        <p>The latest and greatest version!</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-1.4</url>
+    </release>
+    <release version="1.3" date="2016-08-30">
+      <description>
+        <p>The latest and greatest version!</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-1.3</url>
+    </release>
+    <release version="1.2" date="2016-05-01">
+      <description>
+        <p>Many improvements and bug fixes. See IrScrutinizer.releasenotes.txt</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-1.2</url>
+    </release>
+    <release version="1.1.3" date="2015-09-09">
+      <description>
+        <p>New functionality: Support for the CommandFusion learner. Import of CML (RTI) files (like the Glackowitz' Megalist). A number of small improvements and bug fixes. See IrScrutinizer.releasenotes.txt for the full list.</p>
+      </description>
+      <url>https://github.com/bengtmartensson/IrScrutinizer/releases/tag/Version-1.1.3</url>
+    </release>
+    <release version="3.2.18" date="2026-05-15">
+      <description>
+        <ul>
+          <li>This build fixes two issues that were found to be present with v3.2.16.</li>
+          <li>It also fixes a bug in loading an XSight device upgrade into a non-XSight remote setup.</li>
+        </ul>
+      </description>
+      <!-- sic: -->
+      <url>https://sourceforge.net/projects/controlremote/files/RemoteMaster/v3.1.18/</url>
+    </release>
+  </releases>
+</component>

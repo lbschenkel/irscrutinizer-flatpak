@@ -1,0 +1,60 @@
+id: org.harctoolbox.irscrutinizer
+command: IrScrutinizer
+default-branch: stable
+
+runtime: org.freedesktop.Platform
+runtime-version: '25.08'
+sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.openjdk21
+
+finish-args:
+  - --socket=x11
+  - --share=ipc
+  - --env=PATH=/app/jre/bin:/app/bin:/usr/bin
+  - --env=JAVA_HOME=/app/jre
+  # No portal support, allow only downloads folder:
+  - --filesystem=xdg-download
+  # Let user decide if they want to import codes from network:
+  #- --share=network
+  # Let user decide if they want serial port access:
+  #- --device=all
+
+modules:
+- name: openjdk
+  buildsystem: simple
+  build-commands:
+    - /usr/lib/sdk/openjdk21/install.sh
+- name: IrScrutinizer
+  buildsystem: simple
+  sources:
+    - type: file
+      url: https://github.com/bengtmartensson/IrScrutinizer/releases/download/Version-2.4.2/IrScrutinizer-2.4.2-bin.zip
+      sha256: d952d7adf88cb6d5001f15406f7f857b26a0424d0b08f44f8fb50718f72d5a2b
+      dest-filename: IrScrutinizer.zip
+    - type: file
+      path: org.harctoolbox.irscrutinizer.desktop
+    - type: file
+      path: org.harctoolbox.irscrutinizer.metainfo.xml
+    - type: script
+      dest-filename: IrScrutinizer
+      commands:
+        - cd /app/share/${FLATPAK_ID}
+        - exec ./irscrutinizer.sh "$@"
+  build-options:
+    env:
+      PATH: /app/bin:/usr/bin:/usr/lib/sdk/openjdk8/bin
+      JAVA_HOME: /usr/lib/sdk/openjdk8/jvm/java-8-openjdk
+  build-commands:
+    - install -d ${FLATPAK_DEST}/share/${FLATPAK_ID}
+    - unzip -o IrScrutinizer.zip -d ${FLATPAK_DEST}/share/${FLATPAK_ID}
+    # Remove non-Linux files or for different architectures:
+    - |-
+        cd ${FLATPAK_DEST}/share/${FLATPAK_ID}
+        case "$(uname -m)" in
+          x86_64) rm -Rf Linux-i386 Linux-arm ;;
+        esac
+    - install -Dm755 IrScrutinizer ${FLATPAK_DEST}/bin/IrScrutinizer
+    - install -Dm644 ${FLATPAK_DEST}/share/${FLATPAK_ID}/irscrutinizer.png ${FLATPAK_DEST}/share/icons/hicolor/64x64/apps/${FLATPAK_ID}.png
+    - install -Dm644 ${FLATPAK_ID}.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+    - install -Dm644 ${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
